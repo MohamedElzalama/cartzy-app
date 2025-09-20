@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
+import 'package:cartzy_app/feature/home/presentation/view/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -10,13 +11,18 @@ class ProductItemWidget extends StatelessWidget {
   ProductItemWidget({super.key, required this.product});
 
   final ProductEntity product;
-
   bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          ProductDetailsScreen.routeName,
+          arguments: product,
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,

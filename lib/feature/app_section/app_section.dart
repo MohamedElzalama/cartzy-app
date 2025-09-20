@@ -1,5 +1,6 @@
 import 'package:cartzy_app/feature/cart/view/cart_screen.dart';
-import 'package:cartzy_app/feature/favorite/presentation/view/favorite_screen.dart';
+import 'package:cartzy_app/feature/favorite/view/favorite_screen.dart';
+import 'package:cartzy_app/feature/favorite/view_model/favorite_cubit.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/category_use_case.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/product_use_case.dart';
 import 'package:cartzy_app/feature/home/presentation/view/home_screen.dart';
@@ -29,7 +30,10 @@ class _AppSectionState extends State<AppSection> {
       child: HomeScreen(),
     ),
     CartScreen(),
-    FavoriteScreen(),
+    BlocProvider<FavoriteCubit>(
+      create: (context) => FavoriteCubit(),
+      child: FavoriteScreen(),
+    ),
     ProfileScreen(),
   ];
 
