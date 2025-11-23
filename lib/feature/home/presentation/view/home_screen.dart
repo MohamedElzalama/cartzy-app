@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   static const String routeName = 'HomeScreen';
   bool isLoadingProduct = false;
   bool isLoadingCategory = false;
+  int? categoryId = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +72,13 @@ class HomeScreen extends StatelessWidget {
               return Skeletonizer(
                 enabled: isLoadingCategory,
                 child: TabContainerWidget(
-                    categories: isLoadingCategory
-                        ? AppAssets.dummyCategories
-                        : categories),
+                  onTabChanged: (id) {
+                    categoryId = id;
+                  },
+                  categories: isLoadingCategory
+                      ? AppAssets.dummyCategories
+                      : categories,
+                ),
               );
             },
           ),
@@ -82,6 +87,7 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is ProductFailure) {
+                isLoadingProduct = false;
                 return Text(state.message);
               }
               if (state is ProductLoading) {
@@ -108,6 +114,8 @@ class HomeScreen extends StatelessWidget {
                     return Skeletonizer(
                         enabled: isLoadingProduct,
                         child: ProductItemWidget(
+                            productId: categoryId,
+                            homeCubit: context.read<HomeCubit>(),
                             product: isLoadingProduct
                                 ? ProductEntity(
                                     id: 0,

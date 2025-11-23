@@ -28,6 +28,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, true);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
         backgroundColor: Colors.grey[100],
         elevation: 0,
       ),

@@ -6,7 +6,7 @@ import 'package:cartzy_app/feature/home/domain/use_case/category_use_case.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/product_use_case.dart';
 import 'package:cartzy_app/feature/home/presentation/view/home_screen.dart';
 import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
-import 'package:cartzy_app/feature/profile/view/profile_screen.dart';
+import 'package:cartzy_app/feature/profile/presentation/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';

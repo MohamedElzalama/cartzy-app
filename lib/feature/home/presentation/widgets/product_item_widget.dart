@@ -6,12 +6,20 @@ import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:cartzy_app/feature/home/presentation/view/product_details_screen.dart';
+import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItemWidget extends StatefulWidget {
-  const ProductItemWidget({super.key, required this.product});
+  ProductItemWidget({
+    super.key,
+    required this.product,
+    required this.homeCubit,
+    required this.productId,
+  });
   final ProductEntity product;
+  HomeCubit homeCubit;
+  int? productId;
 
   @override
   State<ProductItemWidget> createState() => _ProductItemWidgetState();
@@ -36,12 +44,15 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(
+      onTap: () async {
+        var route = await Navigator.pushNamed(
           context,
           ProductDetailsScreen.routeName,
           arguments: widget.product,
         );
+        if (route == true) {
+          await widget.homeCubit.getProducts(widget.productId);
+        }
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
