@@ -38,7 +38,7 @@ class FavoriteProductItemWidget extends StatelessWidget {
           ),
         );
         if (route == true) {
-          favoriteCubit.getFavorites();
+          await favoriteCubit.getFavorites();
         }
       },
       child: Column(
