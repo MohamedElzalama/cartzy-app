@@ -3,6 +3,7 @@
 import 'package:cartzy_app/core/constants/app_assets.dart';
 import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
 import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
+import 'package:cartzy_app/feature/home/domain/entities/category_entity.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:cartzy_app/feature/home/presentation/widgets/empty_product_list_widget.dart';
@@ -60,6 +61,7 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is CategoryFailure) {
+                isLoadingCategory = false;
                 return Text(state.message);
               }
               if (state is CategoryLoading) {
@@ -71,7 +73,10 @@ class HomeScreen extends StatelessWidget {
               var categories = context.read<HomeCubit>().categories;
               return Skeletonizer(
                 enabled: isLoadingCategory,
-                child: TabContainerWidget(categories: categories),
+                child: TabContainerWidget(
+                    categories: isLoadingCategory
+                        ? AppAssets.dummyCategories
+                        : categories),
               );
             },
           ),

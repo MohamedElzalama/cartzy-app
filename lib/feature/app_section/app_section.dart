@@ -44,6 +44,7 @@ class _AppSectionState extends State<AppSection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: SafeArea(child: widgetList[index]),
       bottomNavigationBar: BottomNavigationBar(
         unselectedFontSize: 13,
         selectedFontSize: 14,
@@ -78,6 +79,7 @@ class _AppSectionState extends State<AppSection> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.shopping_cart),
             icon: SvgPicture.asset(
               'assets/icons/icon-cart.svg',
               height: 23,
@@ -88,6 +90,7 @@ class _AppSectionState extends State<AppSection> {
             label: 'Cart',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.favorite, color: Colors.redAccent),
             icon: SvgPicture.asset(
               'assets/icons/icon-favourite.svg',
               height: 23,
@@ -98,6 +101,7 @@ class _AppSectionState extends State<AppSection> {
             label: ' Favorite',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.person),
             icon: SvgPicture.asset(
               'assets/icons/icon-profile.svg',
               height: 23,
@@ -109,7 +113,6 @@ class _AppSectionState extends State<AppSection> {
           ),
         ],
       ),
-      body: SafeArea(child: widgetList[index]),
     );
   }
 }
