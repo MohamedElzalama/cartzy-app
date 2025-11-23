@@ -9,6 +9,7 @@ class ProductEntity {
     this.description = '',
     this.category = const CategoryEntity(),
     this.images = const [],
+    this.isFavorite = false,
   });
 
   int id;
@@ -18,4 +19,5 @@ class ProductEntity {
   String description;
   CategoryEntity category;
   List<String> images;
+  bool isFavorite;
 }

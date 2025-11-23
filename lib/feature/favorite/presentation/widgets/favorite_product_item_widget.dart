@@ -2,16 +2,21 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
+import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
+import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class FavoriteProductItemWidget extends StatelessWidget {
-  FavoriteProductItemWidget({super.key, required this.product});
+  FavoriteProductItemWidget({
+    super.key,
+    required this.product,
+    required this.favoriteCubit,
+  });
 
-  final ProductEntity product;
-
-  bool isFavorite = false;
+  final FavoriteModel product;
+  FavoriteCubit favoriteCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +57,23 @@ class FavoriteProductItemWidget extends StatelessWidget {
                 top: 5,
                 right: 5,
                 child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite_border, color: Colors.red),
+                  onPressed: () {
+                    product.isFavorite = !product.isFavorite;
+                    favoriteCubit.removeFavorite(product.id).then((value) {
+                      favoriteCubit.getFavorites();
+                    });
+                  },
+                  icon: Icon(
+                      shadows: [
+                        Shadow(
+                          color: Colors.white,
+                          blurRadius: 10,
+                        ),
+                      ],
+                      product.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Colors.red),
                 ),
               )
             ],

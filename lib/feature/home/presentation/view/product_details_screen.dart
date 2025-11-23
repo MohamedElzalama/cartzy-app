@@ -2,6 +2,8 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
+import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
+import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:cartzy_app/feature/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +72,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             AppAssets.dummyNetworkImage,
                             width: double.infinity,
                             height: 330,
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -87,9 +89,31 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: CircleAvatar(
                     backgroundColor: Colors.white70,
                     child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite_border,
-                          color: Colors.black),
+                      onPressed: () async {
+                        product.isFavorite = !product.isFavorite;
+                        if (product.isFavorite) {
+                          await FavoriteDao().insertFavorite(FavoriteModel(
+                            id: product.id,
+                            title: product.title,
+                            price: product.price,
+                            description: product.description,
+                            images: product.images,
+                            isFavorite: product.isFavorite,
+                            category: product.category,
+                            slug: product.slug,
+                          ));
+                        } else {
+                          await FavoriteDao()
+                              .deleteFavoriteByProductId(product.id);
+                        }
+                        setState(() {});
+                      },
+                      icon: Icon(
+                          product.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color:
+                              product.isFavorite ? Colors.red : Colors.black),
                     ),
                   ),
                 ),

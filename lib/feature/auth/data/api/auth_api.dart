@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cartzy_app/core/network/network.dart';
 import 'package:cartzy_app/feature/auth/data/model/request/login_request_dto.dart';
 import 'package:cartzy_app/feature/auth/data/model/request/register_request_dto.dart';
@@ -13,7 +12,8 @@ class AuthApi {
   static AuthApi get instance => _instance ??= AuthApi._();
 
   /// https://api.escuelajs.co/api/v1/users/
-  Future<NetworkResult<RegisterResponseDto>> register(RegisterRequestDto request) async {
+  Future<NetworkResult<RegisterResponseDto>> register(
+      RegisterRequestDto request) async {
     try {
       Uri url = Uri.https("api.escuelajs.co", "/api/v1/users/");
       var response = await http.post(url, body: request.toJson());

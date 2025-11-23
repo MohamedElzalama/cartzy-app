@@ -1,6 +1,7 @@
 import 'package:cartzy_app/feature/cart/view/cart_screen.dart';
-import 'package:cartzy_app/feature/favorite/view/favorite_screen.dart';
-import 'package:cartzy_app/feature/favorite/view_model/favorite_cubit.dart';
+import 'package:cartzy_app/feature/favorite/data/repo/repository/favorite_repository_impl.dart';
+import 'package:cartzy_app/feature/favorite/presentation/view/favorite_screen.dart';
+import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/category_use_case.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/product_use_case.dart';
 import 'package:cartzy_app/feature/home/presentation/view/home_screen.dart';
@@ -31,7 +32,8 @@ class _AppSectionState extends State<AppSection> {
     ),
     CartScreen(),
     BlocProvider<FavoriteCubit>(
-      create: (context) => FavoriteCubit(),
+      create: (context) =>
+          FavoriteCubit(injectFavoriteRepository())..getFavorites(),
       child: FavoriteScreen(),
     ),
     ProfileScreen(),
