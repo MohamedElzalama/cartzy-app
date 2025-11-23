@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
+import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
+import 'package:cartzy_app/feature/home/presentation/view/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -20,7 +22,25 @@ class FavoriteProductItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () async {
+        var route = await Navigator.pushNamed(
+          context,
+          ProductDetailsScreen.routeName,
+          arguments: ProductEntity(
+            id: product.id,
+            title: product.title,
+            description: product.description,
+            price: product.price,
+            images: product.images,
+            isFavorite: true,
+            category: product.category,
+            slug: product.slug,
+          ),
+        );
+        if (route == true) {
+          favoriteCubit.getFavorites();
+        }
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
