@@ -1,9 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cartzy_app/core/constants/app_assets.dart';
-import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
-import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
-import 'package:cartzy_app/feature/home/domain/entities/category_entity.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
 import 'package:cartzy_app/feature/home/presentation/widgets/empty_product_list_widget.dart';

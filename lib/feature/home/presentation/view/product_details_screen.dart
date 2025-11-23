@@ -5,7 +5,6 @@ import 'package:cartzy_app/core/constants/app_assets.dart';
 import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
-import 'package:cartzy_app/feature/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
