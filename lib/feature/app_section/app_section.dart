@@ -1,11 +1,12 @@
 import 'package:cartzy_app/feature/cart/view/cart_screen.dart';
-import 'package:cartzy_app/feature/favorite/view/favorite_screen.dart';
-import 'package:cartzy_app/feature/favorite/view_model/favorite_cubit.dart';
+import 'package:cartzy_app/feature/favorite/data/repo/repository/favorite_repository_impl.dart';
+import 'package:cartzy_app/feature/favorite/presentation/view/favorite_screen.dart';
+import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/category_use_case.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/product_use_case.dart';
 import 'package:cartzy_app/feature/home/presentation/view/home_screen.dart';
 import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
-import 'package:cartzy_app/feature/profile/view/profile_screen.dart';
+import 'package:cartzy_app/feature/profile/presentation/view/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,7 +32,8 @@ class _AppSectionState extends State<AppSection> {
     ),
     CartScreen(),
     BlocProvider<FavoriteCubit>(
-      create: (context) => FavoriteCubit(),
+      create: (context) =>
+          FavoriteCubit(injectFavoriteRepository())..getFavorites(),
       child: FavoriteScreen(),
     ),
     ProfileScreen(),
@@ -42,6 +44,7 @@ class _AppSectionState extends State<AppSection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: SafeArea(child: widgetList[index]),
       bottomNavigationBar: BottomNavigationBar(
         unselectedFontSize: 13,
         selectedFontSize: 14,
@@ -76,6 +79,7 @@ class _AppSectionState extends State<AppSection> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.shopping_cart),
             icon: SvgPicture.asset(
               'assets/icons/icon-cart.svg',
               height: 23,
@@ -86,6 +90,7 @@ class _AppSectionState extends State<AppSection> {
             label: 'Cart',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.favorite, color: Colors.redAccent),
             icon: SvgPicture.asset(
               'assets/icons/icon-favourite.svg',
               height: 23,
@@ -96,6 +101,7 @@ class _AppSectionState extends State<AppSection> {
             label: ' Favorite',
           ),
           BottomNavigationBarItem(
+            activeIcon: Icon(Icons.person),
             icon: SvgPicture.asset(
               'assets/icons/icon-profile.svg',
               height: 23,
@@ -107,7 +113,6 @@ class _AppSectionState extends State<AppSection> {
           ),
         ],
       ),
-      body: SafeArea(child: widgetList[index]),
     );
   }
 }

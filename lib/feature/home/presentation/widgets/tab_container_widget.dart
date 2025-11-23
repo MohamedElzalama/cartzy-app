@@ -5,12 +5,15 @@ import 'package:cartzy_app/feature/home/presentation/widgets/tab_item_widget.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class TabContainerWidget extends StatefulWidget {
-  const TabContainerWidget({
+  TabContainerWidget({
     super.key,
     required this.categories,
+    required this.onTabChanged,
   });
   final List<CategoryEntity> categories;
+  Function(int? id) onTabChanged;
 
   @override
   State<TabContainerWidget> createState() => _TabContainerWidgetState();
@@ -39,6 +42,7 @@ class _TabContainerWidgetState extends State<TabContainerWidget> {
                 setState(() {});
                 int? id =
                     (currentIndex == 0) ? null : widget.categories[index].id;
+                widget.onTabChanged(id);
                 await context.read<HomeCubit>().getProducts(id);
               },
               tabs: widget.categories
