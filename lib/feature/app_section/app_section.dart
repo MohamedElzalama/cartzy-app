@@ -1,4 +1,6 @@
-import 'package:cartzy_app/feature/cart/view/cart_screen.dart';
+import 'package:cartzy_app/feature/cart/data/repo/repository/cart_repository_impl.dart';
+import 'package:cartzy_app/feature/cart/presentation/view/cart_screen.dart';
+import 'package:cartzy_app/feature/cart/presentation/view_model/cart_cubit.dart';
 import 'package:cartzy_app/feature/favorite/data/repo/repository/favorite_repository_impl.dart';
 import 'package:cartzy_app/feature/favorite/presentation/view/favorite_screen.dart';
 import 'package:cartzy_app/feature/favorite/presentation/view_model/favorite_cubit.dart';
@@ -6,7 +8,9 @@ import 'package:cartzy_app/feature/home/domain/use_case/category_use_case.dart';
 import 'package:cartzy_app/feature/home/domain/use_case/product_use_case.dart';
 import 'package:cartzy_app/feature/home/presentation/view/home_screen.dart';
 import 'package:cartzy_app/feature/home/presentation/view_model/home_cubit.dart';
+import 'package:cartzy_app/feature/profile/data/repo/repository/profile_repository_impl.dart';
 import 'package:cartzy_app/feature/profile/presentation/view/profile_screen.dart';
+import 'package:cartzy_app/feature/profile/presentation/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,13 +34,20 @@ class _AppSectionState extends State<AppSection> {
         ..getProducts(null),
       child: HomeScreen(),
     ),
-    CartScreen(),
+    BlocProvider(
+      create: (context) => CartCubit(injectCartRepository())..getAllCartItems(),
+      child: CartScreen(),
+    ),
     BlocProvider<FavoriteCubit>(
       create: (context) =>
           FavoriteCubit(injectFavoriteRepository())..getFavorites(),
       child: FavoriteScreen(),
     ),
-    ProfileScreen(),
+    BlocProvider(
+      create: (context) =>
+          ProfileCubit(injectProfileRepositoryImpl)..getProfile(),
+      child: ProfileScreen(),
+    ),
   ];
 
   int index = 0;

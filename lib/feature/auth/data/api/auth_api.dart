@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:cartzy_app/core/utils/logging_service.dart';
 import 'package:cartzy_app/core/network/network.dart';
 import 'package:cartzy_app/feature/auth/data/model/request/login_request_dto.dart';
 import 'package:cartzy_app/feature/auth/data/model/request/register_request_dto.dart';
 import 'package:cartzy_app/feature/auth/data/model/response/login_response_dto.dart';
 import 'package:cartzy_app/feature/auth/data/model/response/register_response_dto.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
 class AuthApi {
   AuthApi._();
@@ -18,6 +20,7 @@ class AuthApi {
       Uri url = Uri.https("api.escuelajs.co", "/api/v1/users/");
       var response = await http.post(url, body: request.toJson());
       var json = jsonDecode(response.body);
+      LoggingService.instance.log(Level.info, json.toString());
       return NetworkSuccess(RegisterResponseDto.fromJson(json));
     } catch (e) {
       return NetworkError(e.toString());
@@ -31,6 +34,12 @@ class AuthApi {
       var response = await http.post(url, body: request.toJson());
       var responseBody = response.body;
       var json = jsonDecode(responseBody);
+      LoggingService.instance.log(Level.info, json.toString());
+      if (json['statusCode'] != null) {
+        LoggingService.instance
+            .error("Login Failed with status code: ${json['statusCode']}");
+        return NetworkError("Login Failed: ${json['message']}");
+      }
       return NetworkSuccess(LoginResponseDto.fromJson(json));
     } catch (e) {
       return NetworkError(e.toString());

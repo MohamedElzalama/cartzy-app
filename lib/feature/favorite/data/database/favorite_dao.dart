@@ -1,6 +1,6 @@
+import 'package:cartzy_app/core/common/database/db_helper.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:sqflite/sqflite.dart';
-import 'db_helper.dart';
 
 class FavoriteDao {
   final DBHelper _dbHelper = DBHelper();

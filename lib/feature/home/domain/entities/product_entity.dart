@@ -15,7 +15,7 @@ class ProductEntity {
   int id;
   String title;
   String slug;
-  int price;
+  double price;
   String description;
   CategoryEntity category;
   List<String> images;

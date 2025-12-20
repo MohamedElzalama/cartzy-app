@@ -2,12 +2,16 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
+import 'package:cartzy_app/core/dialogs/app_toasts.dart';
+import 'package:cartzy_app/feature/cart/data/database/cart_dao.dart';
+import 'package:cartzy_app/feature/cart/data/model/response/cart_item_model.dart';
 import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:toastification/toastification.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -20,6 +24,8 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int index = 0;
   PageController controller = PageController();
+  bool cartMode = false;
+  int quantity = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        //! product body
         child: Column(
           spacing: 20,
           children: [
@@ -187,22 +194,104 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       //! add to cart
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              backgroundColor: Colors.black,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+        child: Row(
+          spacing: 16,
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (!cartMode) {
+                    cartMode = true;
+                    setState(() {});
+                  } else {
+                    //add to cart action
+                    var cartProduct = CartItemModel(
+                      productId: product.id,
+                      title: product.title,
+                      price: product.price,
+                      description: product.description,
+                      images: product.images,
+                      category: product.category,
+                      slug: product.slug,
+                      isFavorite: product.isFavorite,
+                      quantity: quantity,
+                    );
+                    await CartDao().insertItemToCart(cartProduct);
+                    AppToast.showToast(
+                      // ignore: use_build_context_synchronously
+                      context: context,
+                      title: "Added to cart",
+                      description:
+                          "${product.title} has been added to your cart.",
+                      type: ToastificationType.success,
+                    );
+                    quantity = 1;
+                    cartMode = false;
+                    setState(() {});
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(
+                  cartMode ? "Add to cart" : "Want to buy",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
               ),
             ),
-            child: const Text(
-              "Add to cart",
-              style: TextStyle(fontSize: 16, color: Colors.white),
-            ),
-          ),
+            cartMode
+                ? Expanded(
+                    child: Container(
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey, width: 1.5),
+                      ),
+                      child: Row(
+                        spacing: 16,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              if (quantity > 1) {
+                                quantity--;
+                                setState(() {});
+                              }
+                            },
+                            icon: Icon(
+                              Icons.remove,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            quantity.toString(),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              quantity++;
+                              setState(() {});
+                            },
+                            icon: Icon(
+                              Icons.add,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox.shrink(),
+          ],
         ),
       ),
     );
