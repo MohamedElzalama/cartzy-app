@@ -8,6 +8,7 @@ import 'package:cartzy_app/feature/auth/presentation/view/register_screen.dart';
 import 'package:cartzy_app/feature/auth/presentation/view_model/login/login_cubit.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,10 +29,27 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+
     emailController = TextEditingController();
     passwordController = TextEditingController();
     formKey = GlobalKey<FormState>();
     cubit = LoginCubit(injectableAuthRepo());
+
+    _loadSavedCredentialsAndLogin();
+  }
+
+  Future<void> _loadSavedCredentialsAndLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    emailController.text = prefs.getString('email') ?? '';
+    passwordController.text = prefs.getString('password') ?? '';
+
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      cubit.login(
+        emailController.text,
+        passwordController.text,
+      );
+    }
   }
 
   @override

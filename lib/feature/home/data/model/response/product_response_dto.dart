@@ -17,7 +17,7 @@ class ProductResponseDto {
   int? id;
   String? title;
   String? slug;
-  int? price;
+  double? price;
   String? description;
   CategoryResponseDto? category;
   List<String>? images;
@@ -28,7 +28,7 @@ class ProductResponseDto {
     id = json['id'];
     title = json['title'];
     slug = json['slug'];
-    price = json['price'];
+    price = json['price'] + .0;
     description = json['description'];
     category = json['category'] != null
         ? CategoryResponseDto.fromJson(json['category'])

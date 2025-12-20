@@ -9,13 +9,15 @@ class ProductEntity {
     this.description = '',
     this.category = const CategoryEntity(),
     this.images = const [],
+    this.isFavorite = false,
   });
 
   int id;
   String title;
   String slug;
-  int price;
+  double price;
   String description;
   CategoryEntity category;
   List<String> images;
+  bool isFavorite;
 }

@@ -107,11 +107,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       curve: Curves.easeIn,
                     );
                   } else {
-                    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
                   }
                 },
                 color: Color(0xff212121),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 child: Text(
                   index < onboardingList.length - 1 ? "Next" : "Get Started",
                   style: TextStyle(
