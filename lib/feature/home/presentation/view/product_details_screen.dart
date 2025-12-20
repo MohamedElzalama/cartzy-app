@@ -238,7 +238,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
                 child: Text(
-                  cartMode ? "Add to cart" : "Want to buy",
+                  cartMode ? "Add to cart" : "Want to buy?",
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
