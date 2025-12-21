@@ -1,5 +1,7 @@
 import 'package:cartzy_app/feature/cart/data/model/response/cart_item_model.dart';
 import 'package:cartzy_app/feature/cart/presentation/view_model/cart_cubit.dart';
+import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
+import 'package:cartzy_app/feature/home/presentation/view/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -22,12 +24,32 @@ class CartItemWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              cartItem.images[0],
-              width: 100,
-              height: 100,
+          GestureDetector(
+            onTap: () {
+              // Navigate to product details screen
+              ProductEntity product = ProductEntity(
+                id: cartItem.productId,
+                title: cartItem.title,
+                price: cartItem.price,
+                images: cartItem.images,
+                category: cartItem.category,
+                description: cartItem.description,
+                isFavorite: cartItem.isFavorite,
+                slug: cartItem.slug,
+              );
+              Navigator.pushNamed(
+                context,
+                ProductDetailsScreen.routeName,
+                arguments: product,
+              ).then((value) async => await cubit.getAllCartItems());
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                cartItem.images[0],
+                width: 100,
+                height: 100,
+              ),
             ),
           ),
           SizedBox(width: 10),
@@ -67,6 +89,7 @@ class CartItemWidget extends StatelessWidget {
                 onPressed: () async {
                   await cubit.removeItemFromCart(cartItem.productId);
                   await cubit.getAllCartItems();
+                  cubit.calculateTotalPrice();
                 },
                 icon: Icon(
                   Icons.cancel_outlined,
@@ -87,14 +110,10 @@ class CartItemWidget extends StatelessWidget {
                       IconButton(
                         onPressed: () async {
                           // Decrease quantity logic here
-                          await cubit.updateItemCart(CartItemModel(
-                            productId: cartItem.productId,
-                            title: cartItem.title,
-                            price: cartItem.price,
-                            images: cartItem.images,
-                            quantity: cartItem.quantity - 1,
-                          ));
+                          await cubit.updateItemQuantity(
+                              cartItem.productId, cartItem.quantity - 1);
                           await cubit.getAllCartItems();
+                          cubit.calculateTotalPrice();
                         },
                         icon: Icon(
                           Icons.remove_circle_outline,
@@ -110,20 +129,12 @@ class CartItemWidget extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // Increase quantity logic here
-                        cubit.updateItemCart(CartItemModel(
-                          productId: cartItem.productId,
-                          title: cartItem.title,
-                          price: cartItem.price,
-                          images: cartItem.images,
-                          quantity: cartItem.quantity + 1,
-                          category: cartItem.category,
-                          description: cartItem.description,
-                          isFavorite: cartItem.isFavorite,
-                          slug: cartItem.slug,
-                        ));
-                        cubit.getAllCartItems();
+                        await cubit.updateItemQuantity(
+                            cartItem.productId, cartItem.quantity + 1);
+                        await cubit.getAllCartItems();
+                        cubit.calculateTotalPrice();
                       },
                       icon: Icon(
                         Icons.add_circle_outline,

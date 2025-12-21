@@ -1,7 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartzy_app/core/constants/app_assets.dart';
+import 'package:cartzy_app/feature/cart/data/database/cart_dao.dart';
 import 'package:cartzy_app/feature/favorite/data/database/favorite_dao.dart';
 import 'package:cartzy_app/feature/favorite/data/model/response/favorite_model.dart';
 import 'package:cartzy_app/feature/home/domain/entities/product_entity.dart';
@@ -104,6 +105,8 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                           slug: widget.product.slug,
                         ),
                       );
+                      await CartDao()
+                          .updateCartItemIsFavorite(widget.product.id, true);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("Added to favorites"),
@@ -113,6 +116,8 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
                     } else {
                       await FavoriteDao()
                           .deleteFavoriteByProductId(widget.product.id);
+                      await CartDao()
+                          .updateCartItemIsFavorite(widget.product.id, false);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("Removed from favorites"),

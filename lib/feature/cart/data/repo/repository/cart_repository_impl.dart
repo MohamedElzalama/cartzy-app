@@ -20,6 +20,10 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<void> updateItemInCart(CartItemModel cartItem) async =>
       await dataSourceLocal.updateItemInCart(cartItem);
+
+  @override
+  Future<void> updateItemQuantity(int productId, int quantity) async =>
+      await dataSourceLocal.updateItemQuantity(productId, quantity);
 }
 
 CartRepository injectCartRepository() {

@@ -20,14 +20,15 @@ class CartCubit extends Cubit<CartState> {
     emit(CartSuccess());
   }
 
-  Future<void> updateItemCart(CartItemModel cartItem) async {
-    await cartRepository.updateItemInCart(cartItem);
+  Future<void> updateItemQuantity(int productId, int quantity) async {
+    await cartRepository.updateItemQuantity(productId, quantity);
     emit(CartSuccess());
   }
 
   void calculateTotalPrice() {
+    totalPrice = 0.0;
     for (var item in cartItems) {
-      totalPrice += item.price;
+      totalPrice += item.price * item.quantity;
     }
     emit(CartSuccess());
   }

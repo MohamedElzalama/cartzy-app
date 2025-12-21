@@ -5,4 +5,5 @@ abstract class CartDataSource {
   Future<void> removeItemFromCart(int productId);
   Future<List<CartItemModel>> getAllCartItems();
   Future<void> updateItemInCart(CartItemModel cartItem);
+  Future<void> updateItemQuantity(int productId, int quantity);
 }

@@ -117,9 +117,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             category: product.category,
                             slug: product.slug,
                           ));
+                          await CartDao()
+                              .updateCartItemIsFavorite(product.id, true);
                         } else {
                           await FavoriteDao()
                               .deleteFavoriteByProductId(product.id);
+                          await CartDao()
+                              .updateCartItemIsFavorite(product.id, false);
                         }
                         setState(() {});
                       },

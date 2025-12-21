@@ -19,6 +19,10 @@ class CartDataSourceImpl implements CartDataSource {
   @override
   Future<void> updateItemInCart(CartItemModel cartItem) =>
       db.updateCartItem(cartItem);
+
+  @override
+  Future<void> updateItemQuantity(int productId, int quantity) =>
+      db.updateCartItemQuantity(productId, quantity);
 }
 
 CartDataSource injectCartDataSourceLocal() {

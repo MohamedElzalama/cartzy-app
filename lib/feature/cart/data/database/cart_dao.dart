@@ -24,6 +24,36 @@ class CartDao {
     );
   }
 
+  Future<void> updateCartItemQuantity(int productId, int quantity) async {
+    final db = await _dbHelper.instance;
+    await db.update(
+      'cart',
+      {'quantity': quantity},
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+  }
+
+  Future<void> updateCartItemPrice(int productId, double price) async {
+    final db = await _dbHelper.instance;
+    await db.update(
+      'cart',
+      {'price': price},
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+  }
+
+  Future<void> updateCartItemIsFavorite(int productId, bool isFavorite) async {
+    final db = await _dbHelper.instance;
+    await db.update(
+      'cart',
+      {'isFavorite': isFavorite ? 1 : 0},
+      where: 'productId = ?',
+      whereArgs: [productId],
+    );
+  }
+
   Future<int> deleteCartByProductId(int productId) async {
     final db = await _dbHelper.instance;
     return await db.delete(
