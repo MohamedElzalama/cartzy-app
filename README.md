@@ -2,7 +2,7 @@
 <html>
 <body>
 
-    <h1 align="center">Cartzy App</h1>
+    <h1> align="center">Cartzy App</h1>
     
 <p align="center">
         • <a href="#key-features">Key Features</a>
