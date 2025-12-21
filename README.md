@@ -1,16 +1,71 @@
-# shopping_app
+<!DOCTYPE html>
+<html>
+<body>
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    <h1 align="center">Cartzy App</h1>
+    
+<p align="center">
+        • <a href="#key-features">Key Features</a>
+        • <a href="#tech-stack">Tech Stack & Tools</a>
+        • <a href="#how-it-works">How To Use</a>    
+        • <a href="#api-integration">API Integration</a>
+        • <a href="#installation">Installation & Setup</a>
+        
+ </p>
+    
+ <img src="assets/app_posters/cartzy_app.png" alt="Design">
+ <img src="assets/app_posters/navigation.png" alt="Design">
+ <img src="assets/app_posters/home_page.png" alt="Design">
+ <img src="assets/app_posters/product_details.png" alt="Design">
+ <img src="assets/app_posters/ui.png" alt="Design">
+   
+   
+    
+ <h2 id="key-features">📌 Key Features</h2>
+    <ul>
+        <li><strong>Real-Time Weather Data:</strong> Temperature, humidity, wind speed, visibility.</li>
+        <li><strong>Hourly & 5-Day Forecast:</strong> View upcoming weather conditions.</li>
+        <li><strong>Search & Multiple Locations:</strong> Find weather for different cities.</li>
+        <li><strong>Offline Access:</strong> Stores weather data using Room Database.</li>
+        <li><strong>Animations:</strong> Smooth UI interactions with Lottie & MotionLayout.</li>
+    </ul>
+    
+<h2 id="tech-stack">🛠 Tech Stack & Tools</h2>
+    <ul>
+        <li><strong>Development:</strong> Kotlin, Android Studio, Jetpack Compose/XML</li>
+        <li><strong>Networking:</strong> Retrofit + Gson</li>
+        <li><strong>Storage:</strong> Room Database, DataStore, Shared Preference</li>
+        <li><strong>Location Services:</strong> FusedLocationProviderClient</li>
+        <li><strong>Widget:</strong> Glance Widget</li>
+        <li><strong>Notifications:</strong> Work Manager</li>
+    </ul>
+    
+<h2 id="how-it-works">🛠 How It Works</h2>
+    <ol>
+        <li><strong>Launch the App:</strong> Fetches current location & weather.</li>
+        <li><strong>View Weather Details:</strong> Displays temperature, wind speed, and humidity.</li>
+        <li><strong>Check Forecast:</strong> Hourly & 5-day updates.</li>
+        <li><strong>Search Locations:</strong> Enter a city name for weather info.</li>
+        <li><strong>Toggle Units:</strong> Switch between °C & °F.</li>
+    </ol>
+    
+ <h2 id="api-integration">📂 API Integration (Retrofit Example)</h2>
+    <pre>
+<code>
+interface WeatherService {
+    @GET("/v4/weather/forecast")
+    suspend fun getWeather(@Query("location") location: String, @Query("apikey") apiKey: String): Response<WeatherResponse>
+}
+</code>
+    </pre>
+    
+  <h2 id="installation">🚀 Installation & Setup</h2>
+    <ol>
+        <li>Clone this repository: <code>git clone https://github.com/MohamedKamel3/weather-app.git</code></li>
+        <li>Open in Android Studio.</li>
+        <li>Add your <strong>Tomorrow.io API Key</strong> in <code>MainActivity</code>.</li>
+        <li>Run the project on an emulator or physical device.</li>
+    </ol>
+    
+</body>
+</html>
