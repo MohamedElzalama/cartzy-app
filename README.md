@@ -32,12 +32,11 @@
     
 <h2 id="tech-stack">🛠 Tech Stack & Tools</h2>
    <ul>
-        <li><strong>Development:</strong> Likely built with modern mobile frameworks (e.g., Flutter, React Native, or native Android/iOS with Swift/Kotlin)</li>
-        <li><strong>UI Design:</strong> Custom components with smooth animations, rounded cards, and consistent iconography</li>
-        <li><strong>State Management:</strong> Efficient handling of cart, favorites, and user data</li>
+        <li><strong>Development:</strong> Likely built with modern mobile frameworks (Flutter)</li>
+        <li><strong>UI Design:</strong> Custom components  rounded cards, and consistent iconography</li>
+        <li><strong>State Management:</strong> Efficient handling of cart, favorites, and user data by Bloc State Management</li>
         <li><strong>Image Handling:</strong> High-quality product images with optimized loading and placeholder support</li>
         <li><strong>Navigation:</strong> Bottom tab navigation with clear icons and labels</li>
-        <li><strong>Currency & Localization:</strong> Supports EGP (Egyptian Pound) pricing and multilingual elements (e.g., mixed English/Spanish category names)</li>
     </ul>
     
 <h2 id="how-it-works">🛠 How It Works</h2>
@@ -47,7 +46,6 @@
         <li><strong>View Product Details:</strong> Tap any item to see enlarged images, detailed descriptions, pricing, and options to add to cart with quantity selection.</li>
         <li><strong>Manage Favorites:</strong> Access the Favorites tab to review saved items in a clean grid layout.</li>
         <li><strong>Add to Cart:</strong> From product pages or directly from listings, add items with adjustable quantities; cart updates in real-time.</li>
-        <li><strong>Checkout Process:</strong> Go to the Cart tab to review items, modify quantities, remove products, see total cost, and proceed to checkout.</li>
         <li><strong>Profile Access:</strong> View and edit personal information via the Profile tab.</li>
     </ol>
     
