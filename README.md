@@ -7,9 +7,6 @@
         • <a href="#key-features">Key Features</a>
         • <a href="#tech-stack">Tech Stack & Tools</a>
         • <a href="#how-it-works">How To Use</a>    
-        • <a href="#api-integration">API Integration</a>
-        • <a href="#installation">Installation & Setup</a>
-        
  </p>
     
  <img src="assets/app_posters/cartzy_app.png" alt="Design">
@@ -21,50 +18,40 @@
    
     
  <h2 id="key-features">📌 Key Features</h2>
-    <ul>
-        <li><strong>Real-Time Weather Data:</strong> Temperature, humidity, wind speed, visibility.</li>
-        <li><strong>Hourly & 5-Day Forecast:</strong> View upcoming weather conditions.</li>
-        <li><strong>Search & Multiple Locations:</strong> Find weather for different cities.</li>
-        <li><strong>Offline Access:</strong> Stores weather data using Room Database.</li>
-        <li><strong>Animations:</strong> Smooth UI interactions with Lottie & MotionLayout.</li>
+   <ul>
+        <li><strong>User-Friendly Interface:</strong> Clean, intuitive design with a soft pastel theme for a smooth and enjoyable shopping experience.</li>
+        <li><strong>Product Browsing with Categories:</strong> Easily navigate through categorized products (e.g., All, Change, Nuevo) with visually appealing grids and heart icons for quick favoriting.</li>
+        <li><strong>Favorites Section:</strong> Save and view your favorite items in a dedicated tab for quick access and future purchases.</li>
+        <li><strong>Shopping Cart Management:</strong> Add/remove items, adjust quantities, view real-time totals, and proceed to checkout seamlessly.</li>
+        <li><strong>Detailed Product Views:</strong> Access in-depth product pages with high-quality images, descriptions, pricing (in EGP), quantity selectors, and "Add to Cart" functionality.</li>
+        <li><strong>Bottom Navigation Bar:</strong> Quick access to Home, Cart, Favorites, and Profile sections for effortless app exploration.</li>
+        <li><strong>Guest-Friendly Navigation:</strong> Browse products and categories without requiring login, encouraging exploration before signing up.</li>
+        <li><strong>Profile Management:</strong> Simple user profile view and edit screen with name, email, and password fields.</li>
+        <li><strong>Empty State Handling:</strong> Helpful prompts (e.g., "Your cart is empty – Add items to get started") to guide users.</li>
     </ul>
     
 <h2 id="tech-stack">🛠 Tech Stack & Tools</h2>
-    <ul>
-        <li><strong>Development:</strong> Kotlin, Android Studio, Jetpack Compose/XML</li>
-        <li><strong>Networking:</strong> Retrofit + Gson</li>
-        <li><strong>Storage:</strong> Room Database, DataStore, Shared Preference</li>
-        <li><strong>Location Services:</strong> FusedLocationProviderClient</li>
-        <li><strong>Widget:</strong> Glance Widget</li>
-        <li><strong>Notifications:</strong> Work Manager</li>
+   <ul>
+        <li><strong>Development:</strong> Likely built with modern mobile frameworks (e.g., Flutter, React Native, or native Android/iOS with Swift/Kotlin)</li>
+        <li><strong>UI Design:</strong> Custom components with smooth animations, rounded cards, and consistent iconography</li>
+        <li><strong>State Management:</strong> Efficient handling of cart, favorites, and user data</li>
+        <li><strong>Image Handling:</strong> High-quality product images with optimized loading and placeholder support</li>
+        <li><strong>Navigation:</strong> Bottom tab navigation with clear icons and labels</li>
+        <li><strong>Currency & Localization:</strong> Supports EGP (Egyptian Pound) pricing and multilingual elements (e.g., mixed English/Spanish category names)</li>
     </ul>
     
 <h2 id="how-it-works">🛠 How It Works</h2>
     <ol>
-        <li><strong>Launch the App:</strong> Fetches current location & weather.</li>
-        <li><strong>View Weather Details:</strong> Displays temperature, wind speed, and humidity.</li>
-        <li><strong>Check Forecast:</strong> Hourly & 5-day updates.</li>
-        <li><strong>Search Locations:</strong> Enter a city name for weather info.</li>
-        <li><strong>Toggle Units:</strong> Switch between °C & °F.</li>
+        <li><strong>Launch the App:</strong> Opens to a welcoming home screen with a personalized greeting and category filters.</li>
+        <li><strong>Browse Products:</strong> Scroll through categorized product grids, view images, prices, and tap hearts to add to favorites instantly.</li>
+        <li><strong>View Product Details:</strong> Tap any item to see enlarged images, detailed descriptions, pricing, and options to add to cart with quantity selection.</li>
+        <li><strong>Manage Favorites:</strong> Access the Favorites tab to review saved items in a clean grid layout.</li>
+        <li><strong>Add to Cart:</strong> From product pages or directly from listings, add items with adjustable quantities; cart updates in real-time.</li>
+        <li><strong>Checkout Process:</strong> Go to the Cart tab to review items, modify quantities, remove products, see total cost, and proceed to checkout.</li>
+        <li><strong>Profile Access:</strong> View and edit personal information via the Profile tab.</li>
     </ol>
     
- <h2 id="api-integration">📂 API Integration (Retrofit Example)</h2>
-    <pre>
-<code>
-interface WeatherService {
-    @GET("/v4/weather/forecast")
-    suspend fun getWeather(@Query("location") location: String, @Query("apikey") apiKey: String): Response<WeatherResponse>
-}
-</code>
-    </pre>
     
-  <h2 id="installation">🚀 Installation & Setup</h2>
-    <ol>
-        <li>Clone this repository: <code>git clone https://github.com/MohamedKamel3/weather-app.git</code></li>
-        <li>Open in Android Studio.</li>
-        <li>Add your <strong>Tomorrow.io API Key</strong> in <code>MainActivity</code>.</li>
-        <li>Run the project on an emulator or physical device.</li>
-    </ol>
     
 </body>
 </html>
